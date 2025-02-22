@@ -1,0 +1,48 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_shared {
+    name: "libagmproxy",
+    srcs: ["src/ipc_proxy_server.cpp"],
+    cflags: ["-Wall"],
+    include_dirs: [
+		"inc"
+	],
+    export_include_dirs: [
+		"inc"
+	],
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbinder",
+        "libutils",
+    ],
+}
+
+cc_binary {
+    name: "agmserver",
+    srcs: [
+        "src/agm_server_daemon.cpp",
+        "src/agm_server_wrapper.cpp",
+    ],
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbinder",
+        "libutils",
+        "libagmproxy",
+    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["libaudio_log_utils",
+					 "libexpat"],
+			default: [],
+	    }),
+	cflags: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["-DDYNAMIC_LOG_ENABLED"],
+			 default: [],
+    }),
+	header_libs: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["libaudiologutils_headers"],
+			 default: [],
+    }),
+}

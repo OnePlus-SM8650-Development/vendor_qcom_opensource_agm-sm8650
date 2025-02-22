@@ -1,0 +1,138 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_shared {
+    name: "libagm_pcm_plugin",
+    vendor: true,
+    srcs: ["src/agm_pcm_plugin.c"],
+    cflags: [
+        "-Wall",
+        "-Wno-format",
+        "-Wno-incompatible-pointer-types",
+        "-Wno-enum-conversion",
+    ],
+    include_dirs: [
+        "external/expat/lib",
+    ],
+    header_libs: [
+        "libagm_headers",
+        "libarosal_headers",
+        "libhardware_headers",
+        "qti_kernel_headers",
+     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+            "true": [
+				"libaudiologutils_headers",
+            ],
+            default: [
+            ],
+        }),
+    shared_libs: [
+        "libsndcardparser",
+        "libagmclient",
+        "libutils",
+        "libcutils",
+        "liblog",
+     ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
+
+cc_library_shared {
+    name: "libagm_mixer_plugin",
+    vendor: true,
+    srcs: ["src/agm_mixer_plugin.c"],
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+    include_dirs: [
+        "external/expat/lib",
+    ],
+    header_libs: [
+        "libagm_headers",
+        "libarosal_headers",
+        "qti_kernel_headers",
+     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+            "true": [
+				"libaudiologutils_headers",
+            ],
+            default: [
+            ],
+        }),
+    shared_libs: [
+        "libsndcardparser",
+        "libagmclient",
+        "libcutils",
+        "libutils",
+        "liblog",
+     ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
+
+cc_library_shared {
+    name: "libagm_compress_plugin",
+    vendor: true,
+    srcs: ["src/agm_compress_plugin.c"],
+    cflags: [
+        "-Wno-format",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+        "-Wno-unused-function",
+    ],
+    include_dirs: [
+        "external/expat/lib",
+    ],
+    header_libs: [
+        "libagm_headers",
+        "libarosal_headers",
+        "qti_kernel_headers",
+     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+            "true": [
+				"libaudiologutils_headers",
+            ],
+            default: [
+            ],
+        }),
+    shared_libs: [
+        "libsndcardparser",
+        "libagmclient",
+        "libutils",
+        "libcutils",
+        "liblog",
+        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}

@@ -1,0 +1,25 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_binary {
+    name: "agmclient",
+    srcs: ["src/agm_client_wrapper.cpp"],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbinder",
+        "libutils",
+        "libagmproxy",
+    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["-DDYNAMIC_LOG_ENABLED"],
+			default: [],
+    }),
+    cflags: ["-Wall"],
+    include_dirs: ["external/expat/lib/expat.h"],
+
+    header_libs: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["libaudiologutils_headers"],
+			default: [],
+    }),
+}

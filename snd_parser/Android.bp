@@ -1,0 +1,26 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_shared {
+
+    name: "libsndcardparser",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wall",
+    ] + ["-DCARD_DEF_FILE=\"/vendor/etc/card-defs.xml\""],
+
+    local_include_dirs: ["inc"],
+    export_include_dirs: ["inc"],
+    srcs: ["src/snd-card-parser.c"],
+
+    header_libs: ["libagm_headers"],
+
+    shared_libs: [
+        "libexpat",
+        "libcutils",
+    ],
+
+}

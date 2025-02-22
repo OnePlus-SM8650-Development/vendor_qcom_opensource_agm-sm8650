@@ -1,0 +1,68 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_headers {
+    name: "libagm_headers",
+    vendor: true,
+    export_include_dirs: ["inc/public"],
+}
+
+cc_library_shared {
+    name: "libagm",
+    owner: "qti",
+    vendor: true,
+    cflags: [
+        "-D_ANDROID_",
+        "-DAGM_DEBUG_METADATA",
+        "-DAGM_USE_CUTILS",
+        "-Wno-tautological-compare",
+        "-Wno-macro-redefined",
+        "-Wall",
+        "-D_GNU_SOURCE",
+        "-DACDB_PATH=\"/vendor/etc/acdbdata/\"",
+        "-DACDB_DELTA_FILE_PATH=\"/data/vendor/audio/acdbdata/delta\"",
+    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["-DDYNAMIC_LOG_ENABLED"],
+			default: [],
+    }),
+	
+    local_include_dirs: ["inc/public"] + ["inc/private"],
+    export_include_dirs: ["inc/public"],
+	
+    srcs: [
+        "src/agm.c",
+        "src/graph.c",
+        "src/graph_module.c",
+        "src/metadata.c",
+        "src/session_obj.c",
+        "src/device.c",
+        "src/utils.c",
+        "src/device_hw_ep.c",
+        "src/agm_memlogger.c",
+    ],
+
+    header_libs: [
+        "libarpal_headers",
+        "libspf-headers",
+        "libutils_headers",
+        "libacdb_headers",
+        "libarmemlog_headers",
+    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["libaudiologutils_headers"],
+			default: [],
+    }),
+
+    shared_libs: [
+        "libar-gsl",
+        "liblog",
+        "liblx-osal",
+        "libaudioroute",
+        "libats",
+        "libarmemlog",
+        "libcutils",
+		"libtinyalsa",
+    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
+	        "true": ["libaudio_log_utils",
+					 "libexpat"],
+			default: [],
+	    }),
+}

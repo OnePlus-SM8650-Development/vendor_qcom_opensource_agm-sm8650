@@ -1,0 +1,36 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_headers {
+
+    name: "libagmclient_headers",
+    export_include_dirs: ["inc"],
+    vendor: true,
+
+}
+
+cc_library_shared {
+    name: "libagmclient",
+    owner: "qti",
+    vendor: true,
+
+    cflags: ["-Wno-format"],
+    srcs: [
+        "src/agm_client_wrapper.cpp",
+        "src/AGMCallback.cpp",
+    ],
+
+    local_include_dirs: ["inc"],
+
+    shared_libs: [
+        "libhidlbase",
+        "libutils",
+        "liblog",
+        "libcutils",
+        "libhardware",
+        "libbase",
+        "vendor.qti.hardware.AGMIPC@1.0",
+    ],
+
+    header_libs: ["libagm_headers"],
+
+}

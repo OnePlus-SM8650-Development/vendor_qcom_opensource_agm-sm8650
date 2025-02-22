@@ -1,0 +1,233 @@
+// Copyright (C) 2025 The XPerience Project
+
+cc_library_shared {
+
+    name: "libagmmixer",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+		"-Wno-unused-variable",],
+    srcs: ["agmmixer.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+
+
+    shared_libs: [
+		"libtinyalsa",
+		"libexpat",],
+}
+
+// Build agmplay
+cc_binary {
+
+    name: "agmplay",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+        "-Wno-unused-variable",
+        "-Wno-format-insufficient-args",
+		"-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\"",],
+    srcs: ["agmplay.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+    shared_libs: [
+		"libtinyalsa",
+		"libagmmixer",], 
+}
+
+cc_binary {
+
+    name: "agmcap",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+		"-Wno-format-insufficient-args",
+		"-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\"",],
+    srcs: ["agmcap.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+
+    shared_libs: [
+		"libtinyalsa",
+		"libagmmixer",],
+}
+
+cc_binary {
+
+    name: "agmhostless",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+    ] + ["-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\""],
+    srcs: ["agmhostless.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+    shared_libs: [
+		"libagmmixer",
+        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
+
+cc_binary {
+
+    name: "agmcompressplay",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+		"-Wno-unused-variable",
+		"-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\"",],
+
+    include_dirs: ["external/tinycompress/include"],
+    srcs: ["agmcompressplay.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+
+    shared_libs: [
+		"libagmmixer",
+        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
+
+cc_binary {
+
+    name: "agmcompresscap",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+		"-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\""],
+
+    include_dirs: ["external/tinycompress/include"],
+    srcs: ["agmcompresscap.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+
+    shared_libs: [
+		"libagmmixer",
+        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
+
+cc_binary {
+
+    name: "agmvoiceui",
+    owner: "qti",
+
+    vendor: true,
+
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+		"-Wno-unused-variable",
+        "-Wno-pointer-sign",
+        "-Wno-varargs",
+		"-Wno-incompatible-function-pointer-types",
+		"-DBACKEND_CONF_FILE=\"/vendor/etc/backend_conf.xml\"",],
+    srcs: ["agm_voiceui.c"],
+
+    header_libs: [
+        "libagm_headers",
+        "libarpal_headers",
+        "libacdb_headers",
+    ],
+
+    shared_libs: [
+		"libagmmixer",
+        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+            "true": [
+                "libqti-tinyalsa",
+                "libqti-tinycompress"
+            ],
+            "false": [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+            default: [
+                "libtinyalsa",
+                "libtinycompress"
+            ],
+        }),
+}
