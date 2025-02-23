@@ -70,4 +70,7 @@ cc_library_shared {
 					 "libexpat"],
 			default: [],
 	    }),
+    sanitize: {
+        integer_overflow: true,
+    },
 }
