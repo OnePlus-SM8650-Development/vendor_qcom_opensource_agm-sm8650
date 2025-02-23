@@ -13,7 +13,8 @@ cc_library_shared {
     include_dirs: [
         "system/media/audio_route/include",
         "system/media/audio_utils/include",
-		"external/tinycompress/include"],
+        "external/tinycompress/include",
+    ],
     header_libs: [
         "libagm_headers",
         "libarpal_headers",
@@ -21,11 +22,11 @@ cc_library_shared {
     ],
 
     shared_libs: [
-		"libaudioroute",
-		"libexpat",
+        "libaudioroute",
+        "libexpat",
         "libtinyalsa",
         "libtinycompress",
-     ],
+    ],
     sanitize: {
         integer_overflow: true,
     },
@@ -51,20 +52,20 @@ cc_binary {
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 // agmcap
@@ -86,20 +87,20 @@ cc_binary {
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 // agmhostless
@@ -120,20 +121,20 @@ cc_binary {
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 // agmcompressplay
@@ -152,24 +153,24 @@ cc_binary {
         "libagm_headers",
         "libarpal_headers",
         "libacdb_headers",
-		"generated_kernel_headers",
+        "generated_kernel_headers",
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 // agmcompresscap
@@ -187,24 +188,24 @@ cc_binary {
         "libagm_headers",
         "libarpal_headers",
         "libacdb_headers",
-		"generated_kernel_headers",
+        "generated_kernel_headers",
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 // agmvoiceui
@@ -229,18 +230,18 @@ cc_binary {
     ],
     shared_libs: [
         "libagmmixer",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }

@@ -13,37 +13,38 @@ cc_library_shared {
     include_dirs: [
         "system/media/audio_route/include",
 
-		"external/tinycompress/include"],
+        "external/tinycompress/include",
+    ],
     header_libs: [
         "libagm_headers",
         "qti_kernel_headers",
-     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
-            "true": [
-				"libaudiologutils_headers",
-            ],
-            default: [
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": [
+            "libaudiologutils_headers",
+        ],
+        default: [
+        ],
+    }),
     shared_libs: [
         "libsndcardparser",
         "libagmclient",
         "libutils",
         "libcutils",
         "liblog",
-     ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 cc_library_shared {
@@ -60,33 +61,33 @@ cc_library_shared {
     header_libs: [
         "libagm_headers",
         "qti_kernel_headers",
-     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
-            "true": [
-				"libaudiologutils_headers",
-            ],
-            default: [
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": [
+            "libaudiologutils_headers",
+        ],
+        default: [
+        ],
+    }),
     shared_libs: [
         "libsndcardparser",
         "libagmclient",
         "libcutils",
         "libutils",
         "liblog",
-     ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }
 
 cc_library_shared {
@@ -105,31 +106,31 @@ cc_library_shared {
     header_libs: [
         "libagm_headers",
         "qti_kernel_headers",
-     ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
-            "true": [
-				"libaudiologutils_headers",
-            ],
-            default: [
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": [
+            "libaudiologutils_headers",
+        ],
+        default: [
+        ],
+    }),
     shared_libs: [
         "libsndcardparser",
         "libagmclient",
         "libutils",
         "libcutils",
         "liblog",
-        ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
-            "true": [
-                "libqti-tinyalsa",
-                "libqti-tinycompress"
-            ],
-            "false": [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-            default: [
-                "libtinyalsa",
-                "libtinycompress"
-            ],
-        }),
+    ] + select(soong_config_variable("qtiaudio", "target_uses_qti_tinycompress"), {
+        "true": [
+            "libqti-tinyalsa",
+            "libqti-tinycompress",
+        ],
+        "false": [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+        default: [
+            "libtinyalsa",
+            "libtinycompress",
+        ],
+    }),
 }

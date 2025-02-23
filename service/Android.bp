@@ -22,17 +22,17 @@ cc_library_shared {
         "-D_GNU_SOURCE",
         "-DACDB_PATH=\"/vendor/etc/acdbdata/\"",
         "-DACDB_DELTA_FILE_PATH=\"/data/vendor/audio/acdbdata/delta\"",
-    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["-DDYNAMIC_LOG_ENABLED"],
-			default: [],
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["-DDYNAMIC_LOG_ENABLED"],
+        default: [],
     }),
-	
+
     local_include_dirs: [
-		"inc/public",
-		"inc/private",
-		],
+        "inc/public",
+        "inc/private",
+    ],
     export_include_dirs: ["inc/public"],
-	
+
     srcs: [
         "src/agm.c",
         "src/graph.c",
@@ -51,9 +51,9 @@ cc_library_shared {
         "libutils_headers",
         "libacdb_headers",
         "libarmemlog_headers",
-    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["libaudiologutils_headers"],
-			default: [],
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["libaudiologutils_headers"],
+        default: [],
     }),
 
     shared_libs: [
@@ -64,12 +64,14 @@ cc_library_shared {
         "libats",
         "libarmemlog",
         "libcutils",
-		"libtinyalsa",
-    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["libaudio_log_utils",
-					 "libexpat"],
-			default: [],
-	    }),
+        "libtinyalsa",
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": [
+            "libaudio_log_utils",
+            "libexpat",
+        ],
+        default: [],
+    }),
     sanitize: {
         integer_overflow: true,
     },

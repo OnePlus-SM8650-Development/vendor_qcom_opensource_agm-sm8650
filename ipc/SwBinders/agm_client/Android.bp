@@ -11,15 +11,15 @@ cc_binary {
         "libbinder",
         "libutils",
         "libagmproxy",
-    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["-DDYNAMIC_LOG_ENABLED"],
-			default: [],
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["-DDYNAMIC_LOG_ENABLED"],
+        default: [],
     }),
     cflags: ["-Wall"],
     include_dirs: ["external/expat/lib/expat.h"],
 
-    header_libs: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["libaudiologutils_headers"],
-			default: [],
+    header_libs: select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["libaudiologutils_headers"],
+        default: [],
     }),
 }

@@ -5,11 +5,11 @@ cc_library_shared {
     srcs: ["src/ipc_proxy_server.cpp"],
     cflags: ["-Wall"],
     include_dirs: [
-		"inc"
-	],
+        "inc",
+    ],
     export_include_dirs: [
-		"inc"
-	],
+        "inc",
+    ],
     shared_libs: [
         "liblog",
         "libcutils",
@@ -32,17 +32,19 @@ cc_binary {
         "libbinder",
         "libutils",
         "libagmproxy",
-    ] + select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["libaudio_log_utils",
-					 "libexpat"],
-			default: [],
-	    }),
-	cflags: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["-DDYNAMIC_LOG_ENABLED"],
-			 default: [],
+    ] + select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": [
+            "libaudio_log_utils",
+            "libexpat",
+        ],
+        default: [],
     }),
-	header_libs: select(soong_config_variable("qtiaudio" , "audio_feature_enabled_dynamic_log"),{
-	        "true": ["libaudiologutils_headers"],
-			 default: [],
+    cflags: select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["-DDYNAMIC_LOG_ENABLED"],
+        default: [],
+    }),
+    header_libs: select(soong_config_variable("qtiaudio", "audio_feature_enabled_dynamic_log"), {
+        "true": ["libaudiologutils_headers"],
+        default: [],
     }),
 }
